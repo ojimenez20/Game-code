@@ -66,6 +66,30 @@ redX = 444
 redY = 65
 red = False
 
+#end message
+black = (0,0,0)
+white = (225,225,225)
+
+X = 400
+Y = 400
+
+display_surface = pygame.display.set_mode((X,Y))
+pygame.display.set_caption("End Message")
+
+font = pygame.font.Font("freesansbold.ttf", 20)
+textRect = text.get_rect()
+textRect.center = (X // 2, Y // 2)
+
+while True:
+  display_surface.fill(black)
+  display_surface.blit(text, textRect)
+
+  for event in pygame.event.get() :
+    if event.type == pygame.Quit :
+      pygame.Quit()
+      Quit()
+    pygame.display.update()
+
 
 
 def drawwindow():
@@ -352,7 +376,7 @@ def drawwindow():
     screen.blit(Grasswall, (444,500))
     
     #path
-    screen.blit(Dirtpath, (0,64))
+    screen.blit(Dirtpath, (0,64)) #start of level 2
     screen.blit(Dirtpath, (64,64))
     screen.blit(Dirtpath, (128,64))
     screen.blit(Dirtpath, (190,64))
@@ -374,7 +398,7 @@ def drawwindow():
     screen.blit(Dirtpath, (187,400))
     screen.blit(Dirtpath, (316,400))
     screen.blit(Dirtpath, (316,464))
-    screen.blit(Dirtpath, (187,464))
+    screen.blit(Dirtpath, (187,464)) #end point
     screen.blit(Dirtpath, (129,337))
     screen.blit(Dirtpath, (129,400))
     screen.blit(Dirtpath, (129,464))
@@ -469,11 +493,44 @@ def drawwindow():
     screen.blit(bush_3, (373,346))
     screen.blit(bush_3, (0,370))
     screen.blit(bush_3, (50,370))
-    #screen.blit(bush_3, (250,59))
-    #screen.blit(bush_3, (250,78))
-    #screen.blit(bush_3, (309,59))
-    #screen.blit(bush_3, (309,77))
-  
+    screen.blit(bush_3, (373,370))
+    screen.blit(bush_3, (440,370))
+    screen.blit(bush_3, (0,396))
+    screen.blit(bush_3, (50,396))
+    screen.blit(bush_3, (245,396))
+    screen.blit(bush_3, (373,396))
+    screen.blit(bush_3, (400,396))
+    screen.blit(bush_3, (440,396))
+    screen.blit(bush_3, (0,420))
+    screen.blit(bush_3, (50,420))
+    screen.blit(bush_3, (245,420))
+    screen.blit(bush_3, (373,420))
+    screen.blit(bush_3, (400,420))
+    screen.blit(bush_3, (440,420))
+    screen.blit(bush_3, (0,450))
+    screen.blit(bush_3, (50,450))
+    screen.blit(bush_3, (245,450))
+    screen.blit(bush_3, (373,450))
+    screen.blit(bush_3, (400,450))
+    screen.blit(bush_3, (440,450))
+    screen.blit(bush_3, (0,480))
+    screen.blit(bush_3, (50,480))
+    screen.blit(bush_3, (245,480))
+    screen.blit(bush_3, (373,480))
+    screen.blit(bush_3, (400,480))
+    screen.blit(bush_3, (440,480))
+    screen.blit(bush_3, (0,500))
+    screen.blit(bush_3, (50,500))
+    screen.blit(bush_3, (100,500))
+    screen.blit(bush_3, (150,500))
+    screen.blit(bush_3, (200,500))
+    screen.blit(bush_3, (250,500))
+    screen.blit(bush_3, (300,500))
+    screen.blit(bush_3, (350,500))
+    screen.blit(bush_3, (400,500))
+    screen.blit(bush_3, (440,500))
+
+    
 
 #enemies
   #if enemyON:
@@ -537,6 +594,14 @@ while run:
     if x + 64 >= redX and x <= redX + 64 and y + 64 >= redY and y <= redY + 64:
       print("go to next level")
       drawtiles = 2
+
+  #if dirtpath == True:
+    #print("Game Over")
+    #if x + 64 >= dirtpath and x <= dirtpath + and y + 64 >= dirtpath and y <= dirtpath +64:
+      #print("would you like to play again?")
+
+
+
   #move player_left
   if keys[pygame.K_LEFT] and x > vel:
     x -= vel
