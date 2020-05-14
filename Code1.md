@@ -12,8 +12,12 @@ left = False
 right = False
 up = False
 down = False
+####################################################################
+#YOU DO THIS TWICE? WHY
+####################################################################
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Maze Runner!")
+###################################################################
 
  #player walk forward/down
 Walkdown = [ pygame.image.load("player_down.png"),
@@ -66,29 +70,33 @@ redX = 444
 redY = 65
 red = False
 
-#end message
+#set color predefines
 black = (0,0,0)
 white = (225,225,225)
 
-X = 400
-Y = 400
+####################################################################
+# THIS IS THE SECOND TIME YOU DO THIS...SO I OVERWROTE IT WITH 
+# A BETTER TITLE 
+#It also killed your screen size...so I commented those out.
+####################################################################
+# set size and bar caption
+#These are also confusing variables...since you also use x and y. 
+#X = 400
+#Y = 400
 
-display_surface = pygame.display.set_mode((X,Y))
-pygame.display.set_caption("End Message")
+#display_surface = pygame.display.set_mode((X,Y))
+pygame.display.set_caption("MAZE RUNNER!!")
+###################################################################
 
+
+
+#Setting up the Game Over Message
 font = pygame.font.Font("freesansbold.ttf", 20)
+text = font.render("Game Over", True, black, white)
 textRect = text.get_rect()
-textRect.center = (X // 2, Y // 2)
+textRect.center = (width // 2, height // 2)
+gameOver = False
 
-while True:
-  display_surface.fill(black)
-  display_surface.blit(text, textRect)
-
-  for event in pygame.event.get() :
-    if event.type == pygame.Quit :
-      pygame.Quit()
-      Quit()
-    pygame.display.update()
 
 
 
@@ -299,6 +307,7 @@ def drawwindow():
     screen.blit(bush_3, (250,78))
     screen.blit(bush_3, (309,59))
     screen.blit(bush_3, (309,77))
+    
   
   elif drawtiles == 2:
     
@@ -529,6 +538,10 @@ def drawwindow():
     screen.blit(bush_3, (350,500))
     screen.blit(bush_3, (400,500))
     screen.blit(bush_3, (440,500))
+    
+    ####THIS IS INSIDE YOUR LEVEL 2 CODE
+    if gameOver:
+      screen.blit(text, textRect)
 
     
 
@@ -593,12 +606,21 @@ while run:
     print ("rocks got")
     if x + 64 >= redX and x <= redX + 64 and y + 64 >= redY and y <= redY + 64:
       print("go to next level")
+      x = 0
+      y = 64 
       drawtiles = 2
 
-  #if dirtpath == True:
-    #print("Game Over")
-    #if x + 64 >= dirtpath and x <= dirtpath + and y + 64 >= dirtpath and y <= dirtpath +64:
-      #print("would you like to play again?")
+  ################################################################
+  ##This is for your game over Message
+  ###Psuedocode:
+  #     If it's level 2 and I've reached the path, set gameOver to true. see your drawing stuff
+  ################################################################
+  if drawtiles == 2:
+    if x + 64 >= 187 and x < 187 + 64 and y + 64 >= (464) and y <= 464 + 64:
+      gameOver = True 
+  
+
+
 
 
 
