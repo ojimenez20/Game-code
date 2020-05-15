@@ -12,12 +12,9 @@ left = False
 right = False
 up = False
 down = False
-####################################################################
-#YOU DO THIS TWICE? WHY
-####################################################################
+
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Maze Runner!")
-###################################################################
 
  #player walk forward/down
 Walkdown = [ pygame.image.load("player_down.png"),
@@ -43,11 +40,20 @@ Dirtpath = pygame.image.load("dirt.png")
 bush_3 = pygame.image.load("Bush3.png")
 
  #enemy
+moveRight = True
 enemy = pygame.image.load("sorcerer_attack_1.png")
 enemyX = 191
 enemyY = 128
+enemyLeftX =191
+enemyRightX = 383
 enemyON = True
 
+moveRight2 = False 
+enemy2 = pygame.transform.flip(enemy, True, False)
+enemy2X = 320
+enemy2Y = 394 
+enemy2LeftX = 120
+enemy2RightX = 320 
 
  #stones
 blue_stone = pygame.image.load("blue_stone.png")
@@ -74,19 +80,8 @@ red = False
 black = (0,0,0)
 white = (225,225,225)
 
-####################################################################
-# THIS IS THE SECOND TIME YOU DO THIS...SO I OVERWROTE IT WITH 
-# A BETTER TITLE 
-#It also killed your screen size...so I commented those out.
-####################################################################
-# set size and bar caption
-#These are also confusing variables...since you also use x and y. 
-#X = 400
-#Y = 400
-
-#display_surface = pygame.display.set_mode((X,Y))
 pygame.display.set_caption("MAZE RUNNER!!")
-###################################################################
+
 
 
 
@@ -96,8 +91,6 @@ text = font.render("Game Over", True, black, white)
 textRect = text.get_rect()
 textRect.center = (width // 2, height // 2)
 gameOver = False
-
-
 
 
 def drawwindow():
@@ -188,7 +181,7 @@ def drawwindow():
     screen.blit(Dirtpath, (191,128))
     screen.blit(Dirtpath, (191,0))
     screen.blit(Dirtpath, (191,64))
-    #screen.blit(Dirtpath, (64,320))
+    screen.blit(Dirtpath, (64,320))
     screen.blit(Dirtpath, (0,320))
     screen.blit(Dirtpath, (255,128))
     screen.blit(Dirtpath, (291,192))
@@ -307,7 +300,8 @@ def drawwindow():
     screen.blit(bush_3, (250,78))
     screen.blit(bush_3, (309,59))
     screen.blit(bush_3, (309,77))
-    
+
+    screen.blit(enemy2, (enemy2X,enemy2Y))
   
   elif drawtiles == 2:
     
@@ -546,11 +540,8 @@ def drawwindow():
     
 
 #enemies
-  #if enemyON:
-    #screen.blit(enemy, (enemyX,enemyY))
-
-
-
+  if enemyON:
+    screen.blit(enemy, (enemyX,enemyY))
 
   #stones
   if blue == False:
@@ -586,9 +577,7 @@ def drawwindow():
     Walkcount += 1
   pygame.display.update()
 
-
   
-
 #pygame.display.update()
 drawtiles =1
 
@@ -602,28 +591,19 @@ while run:
           run = False
 
   keys = pygame.key.get_pressed()
-  if blue == True and red == True and orange == True and grey == True:
+  if drawtiles ==1 and blue == True and red == True and orange == True and grey == True:
     print ("rocks got")
     if x + 64 >= redX and x <= redX + 64 and y + 64 >= redY and y <= redY + 64:
       print("go to next level")
       x = 0
-      y = 64 
+      y = 64
       drawtiles = 2
 
-  ################################################################
-  ##This is for your game over Message
-  ###Psuedocode:
-  #     If it's level 2 and I've reached the path, set gameOver to true. see your drawing stuff
-  ################################################################
+
   if drawtiles == 2:
     if x + 64 >= 187 and x < 187 + 64 and y + 64 >= (464) and y <= 464 + 64:
       gameOver = True 
   
-
-
-
-
-
   #move player_left
   if keys[pygame.K_LEFT] and x > vel:
     x -= vel
@@ -667,6 +647,31 @@ while run:
   if x <= greyX + 65 and x + 64 >= greyX -1 and y <= greyY + 65 and y + 64 >= greyY -1:
     grey = True
    
+  #enemy movement
+  if moveRight2 == False and enemy2X >= enemy2LeftX:
+   enemy2X = enemy2X - 10
+
+  if moveRight2 == False and enemy2X <= enemy2LeftX:
+   moveRight2 = True
+
+  if moveRight2 == True and enemy2X <= enemy2RightX:
+    enemy2X = enemy2X + 10
+  
+  if moveRight2 == True and enemy2X >= enemy2RightX:
+    moveRight2 = False
+
+   
+  if moveRight == False and enemyX >= enemyLeftX:
+    enemyX = enemyX - 10
+
+  if moveRight == False and enemyX <= enemyLeftX:
+    moveRight = True
+
+  if moveRight == True and enemyX <= enemyRightX:
+    enemyX = enemyX + 10
+
+  if moveRight == True and enemyX >= enemyRightX:
+    moveRight = False
 
 
   screen.fill((0,0,0))
